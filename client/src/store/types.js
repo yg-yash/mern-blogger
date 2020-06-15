@@ -1,0 +1,34 @@
+//user
+export const USER_LOADING = "USER_LOADING";
+export const SET_AUTHENTICATED = "SET_AUTHENTICATED";
+export const SET_USER = "SET_USER";
+export const SET_UNAUTHENTICATED = "SET_UNAUTHENTICATED";
+
+//ui
+export const SET_ERROR = "SET_ERROR";
+export const CLEAR_ERROR = "CLEAR_ERROR";
+export const LOADING_UI = "LOADING_UI";
+export const STOP_LOADING_UI = "STOP_LOADING_UI";
+
+//blogs
+export const GET_BLOGS = "GET_BLOGS";
+export const SET_MY_BLOGS = "SET_MY_BLOGS";
+export const EDIT_BLOG = "EDIT_BLOG";
+export const LOADING_BLOG = "LOADING_BLOG";
+export const DELETE_BLOG = "DELETE_BLOG";
+export const CREATE_BLOG = "CREATE_BLOG";
+export const LIKE_BLOG = "LIKE_BLOG";
+export const UNLIKE_BLOG = "UNLIKE_BLOG";
+
+//comments
+export const CREATE_COMMENT = "CREATE_COMMENT";
+export const EDIT_COMMENT = "EDIT_COMMENT";
+export const DELETE_COMMENT = "DELETE_COMMENT";
+export const LOADING_COMMENT = "LOADING_COMMENT";
+export const GET_COMMENTS = "GET_COMMENTS";
+export const INCREASE_COMMENT_COUNT = "INCREASE_COMMENT_COUNT";
+export const DECREASE_COMMENT_COUNT = "DECREASE_COMMENT_COUNT";
+
+//notifications
+export const GET_NOTIFICATIONS = "GET_NOTIFICATIONS";
+export const LOADING_NOTIFICATIONS = "LOADING_NOTIFICATIONS";
