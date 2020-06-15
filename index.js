@@ -16,8 +16,7 @@ app.use('/blog', blogRouter);
 app.use('/comment', commentRouter);
 app.use('/notifications', notificationRouter);
 
-//to serve our client side files(react)
-if (process.env.NODE_ENV.trim() === 'production') {
+if (process.env.NODE_ENV === 'production') {
   //to serve our js and css assets
   app.use(express.static('client/build'));
 

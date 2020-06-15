@@ -1,63 +1,63 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 //redux
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 //ui
-import withStyles from "@material-ui/core/styles/withStyles";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
-import InputAdornment from "@material-ui/core/InputAdornment";
+import withStyles from '@material-ui/core/styles/withStyles';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import InputAdornment from '@material-ui/core/InputAdornment';
 //icons
-import VpnKeyIcon from "@material-ui/icons/VpnKey";
-import MailIcon from "@material-ui/icons/Mail";
-import LockIcon from "@material-ui/icons/Lock";
-import PersonPinIcon from "@material-ui/icons/PersonPin";
-import DescriptionIcon from "@material-ui/icons/Description";
-import LanguageIcon from "@material-ui/icons/Language";
+import VpnKeyIcon from '@material-ui/icons/VpnKey';
+import MailIcon from '@material-ui/icons/Mail';
+import LockIcon from '@material-ui/icons/Lock';
+import PersonPinIcon from '@material-ui/icons/PersonPin';
+import DescriptionIcon from '@material-ui/icons/Description';
+import LanguageIcon from '@material-ui/icons/Language';
 
-import { signup } from "../store/actions/user";
+import { signup } from '../store/actions/user';
 
-const styles = theme => ({
+const styles = (theme) => ({
   center: {
-    margin: "auto",
-    width: "50%",
-    padding: "10px",
-    textAlign: "center"
+    margin: 'auto',
+    width: '50%',
+    padding: '10px',
+    textAlign: 'center',
   },
   pageTitle: {
-    margin: "10px auto 10px auto"
+    margin: '10px auto 10px auto',
   },
   textField: {
-    margin: "10px auto 10px auto"
+    margin: '10px auto 10px auto',
   },
   button: {
-    margin: "20px auto 20px auto"
+    margin: '20px auto 20px auto',
   },
   iconB: {
-    marginRight: "5px"
+    marginRight: '5px',
   },
   error: {
-    color: "red"
-  }
+    color: 'red',
+  },
 });
 
 class SignUp extends Component {
   state = {
-    email: "",
-    password: "",
-    cpassword: "",
-    name: "",
-    bio: "",
-    website: "",
-    errors: []
+    email: '',
+    password: '',
+    cpassword: '',
+    name: '',
+    bio: '',
+    website: '',
+    errors: [],
   };
   componentDidMount() {
     // If logged in and user navigates to Login page, should redirect them to dashboard
     if (this.props.authenticated) {
-      this.props.history.push("/");
+      this.props.history.push('/');
     }
   }
   UNSAFE_componentWillReceiveProps(nextProps) {
@@ -65,10 +65,10 @@ class SignUp extends Component {
       this.setState({ errors: nextProps.errors });
     }
   }
-  handleInputChange = e => {
+  handleInputChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
-  onFormSubmit = e => {
+  onFormSubmit = (e) => {
     e.preventDefault();
     const userDetails = {
       email: this.state.email,
@@ -76,7 +76,7 @@ class SignUp extends Component {
       cpassword: this.state.cpassword,
       name: this.state.name,
       bio: this.state.bio,
-      website: this.state.website
+      website: this.state.website,
     };
     this.props.signup(userDetails, this.props.history);
   };
@@ -111,48 +111,53 @@ class SignUp extends Component {
                   <InputAdornment position="start">
                     <MailIcon color="secondary" />
                   </InputAdornment>
-                )
+                ),
               }}
               className={classes.textField}
             />
             <br />
-            <TextField
-              id="password"
-              type="password"
-              name="password"
-              placeholder="Password"
-              error={errors.password ? true : false}
-              helperText={errors && errors.password}
-              onChange={this.handleInputChange}
-              value={this.state.password}
-              style={{ marginRight: "5px" }}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <LockIcon color="secondary" />
-                  </InputAdornment>
-                )
-              }}
-              className={classes.textField}
-            />
-            <TextField
-              id="cpassword"
-              type="password"
-              name="cpassword"
-              placeholder="Confirm Password"
-              error={errors.cpassword ? true : false}
-              helperText={errors && errors.cpassword}
-              onChange={this.handleInputChange}
-              value={this.state.cpassword}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <LockIcon color="secondary" />
-                  </InputAdornment>
-                )
-              }}
-              className={classes.textField}
-            />
+            <Grid container justify="space-between" spacing={10}>
+              <Grid item md>
+                <TextField
+                  id="password"
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  error={errors.password ? true : false}
+                  helperText={errors && errors.password}
+                  onChange={this.handleInputChange}
+                  value={this.state.password}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <LockIcon color="secondary" />
+                      </InputAdornment>
+                    ),
+                  }}
+                  className={classes.textField}
+                />
+              </Grid>
+              <Grid item md>
+                <TextField
+                  id="cpassword"
+                  type="password"
+                  name="cpassword"
+                  placeholder="Confirm Password"
+                  error={errors.cpassword ? true : false}
+                  helperText={errors && errors.cpassword}
+                  onChange={this.handleInputChange}
+                  value={this.state.cpassword}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <LockIcon color="secondary" />
+                      </InputAdornment>
+                    ),
+                  }}
+                  className={classes.textField}
+                />
+              </Grid>
+            </Grid>
             <TextField
               id="name"
               type="text"
@@ -168,7 +173,7 @@ class SignUp extends Component {
                   <InputAdornment position="start">
                     <PersonPinIcon color="secondary" />
                   </InputAdornment>
-                )
+                ),
               }}
               className={classes.textField}
             />
@@ -191,7 +196,7 @@ class SignUp extends Component {
                   <InputAdornment position="start">
                     <DescriptionIcon color="secondary" />
                   </InputAdornment>
-                )
+                ),
               }}
               className={classes.textField}
             />
@@ -211,7 +216,7 @@ class SignUp extends Component {
                   <InputAdornment position="start">
                     <LanguageIcon color="secondary" />
                   </InputAdornment>
-                )
+                ),
               }}
               className={classes.textField}
             />
@@ -232,7 +237,7 @@ class SignUp extends Component {
           </form>
           <Typography variant="subtitle1">
             Have An Account Already?
-            <Link to="/login" style={{ cursor: "pointer" }}>
+            <Link to="/login" style={{ cursor: 'pointer' }}>
               Log In
             </Link>
           </Typography>
@@ -244,12 +249,12 @@ class SignUp extends Component {
 
 SignUp.propTypes = {
   signup: PropTypes.func.isRequired,
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   errors: state.ui.errors,
-  authenticated: state.user.authenticated
+  authenticated: state.user.authenticated,
 });
 
 const mapDispatchToProps = { signup };
