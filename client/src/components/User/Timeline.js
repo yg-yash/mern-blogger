@@ -1,37 +1,37 @@
-import React, { Component } from "react";
-import withStyles from "@material-ui/core/styles/withStyles";
-import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
-import CardContent from "@material-ui/core/CardContent";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import withStyles from '@material-ui/core/styles/withStyles';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardContent from '@material-ui/core/CardContent';
+import { connect } from 'react-redux';
 
-import TimelineList from "./TimelineList";
-import TimelineSkeleton from "../../util/skeletons/TimelineSkeleton";
-const styles = theme => ({
+import TimelineList from './TimelineList';
+import TimelineSkeleton from '../../util/skeletons/TimelineSkeleton';
+const styles = (theme) => ({
   root: {
     minWidth: 275,
-    textAlign: "center",
+    textAlign: 'center',
     boxShadow:
-      "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+      '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
     maxHeight: 200,
-    overflow: "auto"
+    overflow: 'auto',
   },
   cardHeader: {
-    margin: "5px 0 0 0",
-    padding: 0
+    margin: '5px 0 0 0',
+    padding: 0,
   },
   avatar: {
-    left: "20px",
-    top: "5px",
-    backgroundColor: "pink"
-  }
+    left: '20px',
+    top: '5px',
+    backgroundColor: 'pink',
+  },
 });
 
 class Timeline extends Component {
   render() {
     const {
       classes,
-      notifications: { notifications, loading }
+      notifications: { notifications, loading },
     } = this.props;
 
     return (
@@ -41,9 +41,7 @@ class Timeline extends Component {
           {loading ? (
             <TimelineSkeleton />
           ) : notifications ? (
-            notifications.map(notification => {
-              console.log(notification);
-
+            notifications.map((notification) => {
               return (
                 <TimelineList
                   key={notification._id}
@@ -53,12 +51,12 @@ class Timeline extends Component {
               );
             })
           ) : (
-            ""
+            ''
           )}
         </CardContent>
       </Card>
     );
   }
 }
-const mapStateToProps = state => ({ notifications: state.notifications });
+const mapStateToProps = (state) => ({ notifications: state.notifications });
 export default connect(mapStateToProps)(withStyles(styles)(Timeline));

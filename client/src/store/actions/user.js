@@ -6,14 +6,11 @@ import {
   CLEAR_ERROR,
 } from '../types';
 import axios from 'axios';
-import setAuthToken from '../../util/setAuthToken';
 
 export const logIn = (userDetails, history) => async (dispatch) => {
   try {
     const response = await axios.post('/user/login', userDetails);
-    const { token } = response.data;
-    localStorage.setItem('jwtToken', token);
-    await setAuthToken(token);
+    await setAuthrorizationHeader(response.data.token);
     dispatch(getUserData());
     dispatch({ type: CLEAR_ERROR });
 
@@ -43,10 +40,13 @@ export const getUserData = () => async (dispatch) => {
   }
 };
 export const logout = (history) => async (dispatch) => {
-  localStorage.removeItem('jwtToken');
-  setAuthToken(false);
-  dispatch({ type: SET_UNAUTHENTICATED });
-  history.push('/login');
+  try {
+    await localStorage.removeItem('FBIdToken');
+    delete axios.defaults.headers.common['Authorization'];
+    dispatch({ type: SET_UNAUTHENTICATED });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const editUser = (editedUser) => async (dispatch, getState) => {
@@ -58,4 +58,10 @@ export const editUser = (editedUser) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({ type: SET_ERROR, payload: error.response.data });
   }
+};
+
+const setAuthrorizationHeader = async (token) => {
+  const FBIdToken = `Bearer ${token}`;
+  await localStorage.setItem('FBIdToken', FBIdToken);
+  axios.defaults.headers.common['Authorization'] = FBIdToken;
 };

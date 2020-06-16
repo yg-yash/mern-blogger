@@ -1,56 +1,56 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 //redux
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 //ui
-import withStyles from "@material-ui/core/styles/withStyles";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
-import InputAdornment from "@material-ui/core/InputAdornment";
+import withStyles from '@material-ui/core/styles/withStyles';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import InputAdornment from '@material-ui/core/InputAdornment';
 //icons
-import VpnKeyIcon from "@material-ui/icons/VpnKey";
-import MailIcon from "@material-ui/icons/Mail";
-import LockIcon from "@material-ui/icons/Lock";
-import { Link } from "react-router-dom";
+import VpnKeyIcon from '@material-ui/icons/VpnKey';
+import MailIcon from '@material-ui/icons/Mail';
+import LockIcon from '@material-ui/icons/Lock';
+import { Link } from 'react-router-dom';
 
-import { logIn } from "../store/actions/user";
+import { logIn } from '../store/actions/user';
 
-const styles = theme => ({
+const styles = (theme) => ({
   center: {
-    margin: "auto",
-    width: "50%",
-    padding: "10px",
-    textAlign: "center"
+    margin: 'auto',
+    width: '50%',
+    padding: '10px',
+    textAlign: 'center',
   },
   pageTitle: {
-    margin: "10px auto 10px auto"
+    margin: '10px auto 10px auto',
   },
   textField: {
-    margin: "20px auto 20px auto"
+    margin: '20px auto 20px auto',
   },
   button: {
-    margin: "20px auto 20px auto"
+    margin: '20px auto 20px auto',
   },
   iconB: {
-    marginRight: "5px"
+    marginRight: '5px',
   },
   error: {
-    color: "red"
-  }
+    color: 'red',
+  },
 });
 
 class Login extends Component {
   state = {
-    email: "",
-    password: "",
-    errors: []
+    email: '',
+    password: '',
+    errors: [],
   };
   componentDidMount() {
     // If logged in and user navigates to Login page, should redirect them to dashboard
     if (this.props.authenticated) {
-      this.props.history.push("/");
+      this.props.history.push('/');
     }
   }
   UNSAFE_componentWillReceiveProps(nextProps) {
@@ -59,14 +59,14 @@ class Login extends Component {
     }
   }
 
-  handleInputChange = e => {
+  handleInputChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
-  onFormSubmit = e => {
+  onFormSubmit = (e) => {
     e.preventDefault();
     const userDetails = {
       email: this.state.email,
-      password: this.state.password
+      password: this.state.password,
     };
     this.props.logIn(userDetails, this.props.history);
   };
@@ -100,7 +100,7 @@ class Login extends Component {
                   <InputAdornment position="start">
                     <MailIcon color="secondary" />
                   </InputAdornment>
-                )
+                ),
               }}
               className={classes.textField}
             />
@@ -119,7 +119,7 @@ class Login extends Component {
                   <InputAdornment position="start">
                     <LockIcon color="secondary" />
                   </InputAdornment>
-                )
+                ),
               }}
               className={classes.textField}
             />
@@ -140,7 +140,7 @@ class Login extends Component {
           </form>
           <Typography variant="subtitle1">
             Don't Have An Account?
-            <Link to="/signup" style={{ cursor: "pointer" }}>
+            <Link to="/signup" style={{ cursor: 'pointer' }}>
               Sign Up
             </Link>
           </Typography>
@@ -152,12 +152,12 @@ class Login extends Component {
 
 Login.propTypes = {
   logIn: PropTypes.func.isRequired,
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   errors: state.ui.errors,
-  authenticated: state.user.authenticated
+  authenticated: state.user.authenticated,
 });
 
 const mapDispatchToProps = { logIn };
